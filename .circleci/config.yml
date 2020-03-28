@@ -4,7 +4,7 @@ workflows:
   test-env-vars:
     jobs:
       - build:
-          context: my_context_name # has an env var called MY_ENV_VAR
+          context: SAMPLE # has an env var called MY_ENV_VAR
 
 jobs:
   build:
