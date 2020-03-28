@@ -1,16 +1,14 @@
 version: 2.0
 jobs:
- test-workflow:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - run:
-          command: |
-            echo "${Value1}"
-            
+  - run:
+      name: contextで設定した値を表示する
+      command: |
+        echo "${Value1}"
+        echo "${Value2}"            
+
 workflows:
- version: 2
-  test-workflow:
+  version: 2
+  build_and_deploy:
     jobs:
-      - test:
+      - build:
         context: KANKYO_HENSU_MEI
