@@ -1,14 +1,27 @@
 version: 2
-jobs:
-  build:
-    docker: # Executor タイプです。他に machine、macOS という実行タイプを指定できます
-      - image: circleci/node:4.8.2 # プライマリコンテナです。このなかでジョブコマンドが実行されます
-    steps:
-      - checkout # ソースコードをチェックアウトする特別なステップ
-      - run: # コマンドを実行する run ステップ。以下を参照してください。
-      # circleci.com/docs/ja/2.0/configuration-reference/#run
-          name: テストを実行
-          command: echo 'asdfads' # 実行可能なコマンド。デフォルトでは、
-          # /bin/bash -eo pipefail オプションを使用して
-          # 非ログインシェルで実行されます。
+  jobs:
+    build1: # ジョブ名
+      docker: # プライマリコンテナイメージを指定します
+      # dockerhub にあるビルド済みの CircleCI イメージのリストについては、
+      # circleci.com/docs/ja/2.0/circleci-images/ を参照してください。
+        - image: buildpack-deps:trusty
 
+        - image: postgres:9.4.1 # 1 つの共通ネットワーク内で実行される
+        # セカンダリ・サービスコンテナのデータベースイメージを指定します。
+        # 共通ネットワークでは、プライマリコンテナ上に公開されている
+        # ポートをローカルホストで利用できます。
+         environment: # POSTGRES_USER 認証環境変数を指定します。
+          # 環境変数の使用方法については、
+          # circleci.com/docs/ja/2.0/env-vars/ を参照してください。
+           POSTGRES_USER: root
+
+    build2:
+      machine: # Docker 17.06.1-ce および docker-compose 1.14.0 と
+      # 共に Ubuntu バージョン 14.04 イメージを使用する
+      # マシンイメージを指定します。新しいイメージのリリースについては、
+      # CircleCI Discuss の「Announcements」をフォローしてください。
+        image: circleci/classic:201708-01
+
+    build3:
+      macos: # Xcode バージョン 9.0 の macOS 仮想マシンを指定します
+        xcode: "9.0"
