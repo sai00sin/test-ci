@@ -16,3 +16,4 @@ services:
     image: postgres:9.6.2-alpine
     environment:
       POSTGRES_USER: root
+

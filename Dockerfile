@@ -1,4 +1,3 @@
-  
 FROM alpine:3.5
 
 ADD docker-entrypoint.sh /
