@@ -2,11 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: circleci/node:4.8.2
     steps:
-      - run:
-          name: 実行時の PATH 書き換えおよび環境変数定義
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
+      - checkout
+      - run: echo "hello world"
