@@ -19,4 +19,4 @@ workflows:
   one_and_two:
     jobs:
       - one
-        context: SAMPLE
+    context: SAMPLE
