@@ -1,30 +1,27 @@
-# config.yml 内
 version: 2.1
+description: # この Orb の目的
 
-jobs:
-  myjob:
-    parameters:
-      preinstall-foo:
-        type: boolean
-        default: false
-    machine: true
-    steps:
-
-      - run: echo "preinstall is << parameters.preinstall-foo >>"
-      - when:
-          condition: << parameters.preinstall-foo >>
-          steps:
-            - run: echo "preinstall"
-      - unless:
-          condition: << parameters.preinstall-foo >>
-          steps:
-            - run: echo "don't preinstall"
+orbs:
+  my-orb:
+    orbs:
+      codecov: circleci/codecov-clojure@0.0.4
+    executors:
+      specialthingsexecutor:
+        docker:
+          - image: circleci/ruby:1.4.2
+    commands:
+      dospecialthings:
+        steps:
+          - run: echo "We will now do special things"
+    jobs:
+      myjob:
+        executor: specialthingsexecutor
+        steps:
+          - dospecialthings
+          - codecov/upload:
+              path: ~/tmp/results.xml
 
 workflows:
-  workflow:
+  main:
     jobs:
-
-      - myjob:
-          preinstall-foo: false
-      - myjob:
-          preinstall-foo: true
+      - my-orb/myjob
