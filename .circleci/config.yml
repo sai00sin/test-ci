@@ -1,7 +1,4 @@
 version: 2.1
-
-
-version: 2
 jobs:
   one:
     docker:
@@ -22,3 +19,4 @@ workflows:
   one_and_two:
     jobs:
       - one
+        context: SAMPLE
