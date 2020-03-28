@@ -8,7 +8,7 @@ jobs:
       - run: # コマンドを実行する run ステップ。以下を参照してください。
       # circleci.com/docs/ja/2.0/configuration-reference/#run
           name: テストを実行
-          command: make test # 実行可能なコマンド。デフォルトでは、
+          command: echo 'asdfads' # 実行可能なコマンド。デフォルトでは、
           # /bin/bash -eo pipefail オプションを使用して
           # 非ログインシェルで実行されます。
 
