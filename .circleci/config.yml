@@ -1,21 +1,30 @@
+# config.yml 内
 version: 2.1
 
 jobs:
-  sayhello: # パラメーター化されたジョブを定義します
-    description: パラメーター化されたジョブを例示する以外、ほとんど何もしないジョブ
+  myjob:
     parameters:
-      saywhat:
-        description: "だれに挨拶するべきか"
-        default: "World"
-        type: string
+      preinstall-foo:
+        type: boolean
+        default: false
     machine: true
     steps:
 
-      - run: echo "Hello << parameters.saywhat >>"
+      - run: echo "preinstall is << parameters.preinstall-foo >>"
+      - when:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "preinstall"
+      - unless:
+          condition: << parameters.preinstall-foo >>
+          steps:
+            - run: echo "don't preinstall"
 
 workflows:
-  build:
+  workflow:
     jobs:
 
-      - sayhello: # パラメーター化したジョブを呼び出します
-          saywhat: Everyone
+      - myjob:
+          preinstall-foo: false
+      - myjob:
+          preinstall-foo: true
