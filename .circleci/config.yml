@@ -1,27 +1,11 @@
-version: 2.0
-jobs:
- Hello-World:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - run:
-         name: Hello World
-         command: |
-           echo 'Hello World!'
-           echo 'This is the delivery pipeline'
- I-Have-Code:
-   docker:
-     - image: alpine:3.7
-   steps:
-     - checkout
-     - run:
-         name: contextで設定した値を表示する
-         command:
-           echo KANKYO_HENSU_MEI
 
 workflows:
   version: 2
-  build_and_push_image:
+  my-workflow:
     jobs:
-      - I-Have-Code:
-          context: KANKYO_HENSU_MEI
+      - run-tests: 
+        context: KANKYO_HENSU_MEI
+
+
+
+
