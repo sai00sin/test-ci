@@ -1,24 +1,37 @@
 version: 2.1
 
 executors:
-  python:
+  xenial:
+    parameters:
+      some-value:
+        type: string
+        default: foo
+    environment:
+      SOME_VAR: << parameters.some-value >>
     docker:
 
-      - image: python:3.7.0
-      - image: rabbitmq:3.6-management-alpine
-    environment:
-      ENV: ci
-      TESTS: all
-    shell: /bin/bash    
-    working_directory: ~/project
+      - image: ubuntu:xenial
+  bionic:
+    docker:
+      - image: ubuntu:bionic
 
 jobs:
-  build:
-    docker:
+  test:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
 
-      - image: python:2.7.15
-      - image: postgres:9.6
-    executor: python
-    environment:
-      TESTS: unit
-    working_directory: ~/tests
+      - run: some-tests
+
+workflows:
+  workflow:
+    jobs:
+
+      - test:
+          e: bionic
+      - test:
+          e:
+            name: xenial
+            some-value: foobar
