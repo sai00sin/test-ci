@@ -3,12 +3,14 @@ jobs:
   - run:
       name: contextで設定した値を表示する
       command: |
-        echo "${Value1}"
-        echo "${Value2}"            
+        echo KANKYO_HENSU_MEI
+
+
 
 workflows:
   version: 2
-  build_and_deploy:
+  build_and_push_image:
     jobs:
-      - build:
-        context: KANKYO_HENSU_MEI
+      - test:
+          context: KANKYO_HENSU_MEI
+
