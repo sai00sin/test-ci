@@ -2,7 +2,7 @@ version: 2.0
 jobs:
   - run:
       name: contextで設定した値を表示する
-      command: |
+      command:
         echo KANKYO_HENSU_MEI
 
 
