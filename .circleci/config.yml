@@ -1,21 +1,20 @@
 version: 2.1
-jobs:
-  one:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspaces" > my_workspace/echo-output
-      - persist_to_workspace:
-          # 絶対パス、または working_directory からの相対パスにする必要があります
-          root: my_workspace
-          # root からの相対パスにする必要があります
-          paths:
-            - echo-output      
-workflows:
-  version: 2
-  one_and_two:
+
+jobs: # basic units of work in a run
+  build: 
+    docker: # use the Docker executor
+      # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
+      - image: circleci/node:10.0-browsers
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      # Run a step to setup an environment variable
+      # Redirect MY_ENV_VAR into $BASH_ENV
+      - run: 
+          name: "Setup custom environment variables"
+          command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
+
+workflows: # a single workflow with a single job called build
+  build:
     jobs:
-      - one
+      - build:
+          context: SAMPLE
