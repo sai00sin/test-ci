@@ -1,17 +1,16 @@
-version: 2
+version: 2.0
 jobs:
- build:
-   machine: true
+ test-workflow:
+   docker:
+     - image: alpine:3.7
    steps:
-     - checkout
-     # UI に保管されている ID・パスワードを使い
-     # プライベート Docker イメージによる専用 DB を稼働させる
-     - run: |
-         docker login -u $DOCKER_USER -p $DOCKER_PASS
-         docker run -d --name db company/proprietary-db:1.2.3
-
-     # アプリケーションイメージをビルド
-     - run: docker build -t company/app:$CIRCLE_BRANCH .
-
-     # イメージのデプロイ
-     - run: docker push company/app:$CIRCLE_BRANCH
+     - run:
+          command: |
+            echo "${Value1}"
+            
+workflows:
+ version: 2
+  test-workflow:
+    jobs:
+      - test:
+        context: KANKYO_HENSU_MEI
