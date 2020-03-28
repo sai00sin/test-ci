@@ -11,9 +11,17 @@ jobs:
           name: "echo an env var that is part of our context"
           command:
             echo KANKYO_HENSU_MEI
-
+  job:
+    run-tests:
+      docker:
+        - image: circleci/ruby:2.4.1
+      steps:
+        - checkout
+        - run: echo "${KANKYO_HENSU_MEI}"
+    
 workflows:
-  test-env-vars:
+  version: 2
+  my-workflow:
     jobs:
-      - build:
-          context: SAMPLE # has an env var called MY_ENV_VAR
+      - run-tests:
+        context: SAMPLE
