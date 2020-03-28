@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  hoge: # <-- ここ
+  hoge:
     working_directory: ~/workspace
     docker:
       - image: node:9.4.0
@@ -9,3 +9,8 @@ jobs:
       - run:
           name: Echo
           command: echo hello, world.
+workflows:
+  version: 2
+  fuga:
+    jobs:
+      - hoge
