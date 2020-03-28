@@ -1,10 +1,5 @@
 version: 2.1
 
-workflows:
-  test-env-vars:
-    jobs:
-      - build:
-          context: SAMPLE # has an env var called MY_ENV_VAR
 
 jobs:
   build:
@@ -15,4 +10,10 @@ jobs:
       - run: 
           name: "echo an env var that is part of our context"
           command:
-            echo "${KANKYO_HENSU_MEI}"
+            echo "${KANKYO_HENSU_MEI	}"
+
+workflows:
+  test-env-vars:
+    jobs:
+      - build:
+          context: SAMPLE # has an env var called MY_ENV_VAR
