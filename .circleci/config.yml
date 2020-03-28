@@ -1,12 +1,9 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-    steps:
-      - run:
-          name: 実行時の PATH 書き換えおよび環境変数定義
-          command: |
-            echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
-            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
-            source $BASH_ENV
+version: 2.1
+
+orbs:
+  hello: circleci/hello-build@0.0.7 # circleci/buildpack-deps Docker イメージを使います
+
+  workflows:
+    'Hello Workflow':
+      jobs:
+        - hello/hello-build
