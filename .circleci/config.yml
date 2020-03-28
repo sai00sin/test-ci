@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/mern-starter
     # プライマリコンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: circleci/node:4.8.2
     # セカンダリコンテナは、2番目にリストしたイメージのインスタンスです。プライマリコンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
       - image: mongo:3.4.4-jessie
     steps:
