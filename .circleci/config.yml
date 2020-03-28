@@ -2,13 +2,12 @@ version: 2.1
 
 
 jobs:
-  job:
-    run-tests:
-      docker:
-        - image: circleci/ruby:2.4.1
-      steps:
-        - checkout
-        - run: echo "${KANKYO_HENSU_MEI}"
+  run-tests:
+    docker:
+      - image: circleci/ruby:2.4.1
+    steps:
+      - checkout
+      - run: echo "${KANKYO_HENSU_MEI}"
     
 workflows:
   version: 2
