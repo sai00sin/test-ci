@@ -1,18 +1,18 @@
-jobs:
-  one:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo KANKYO_HENSU_MEI
+version: 2.1
 
 workflows:
-  version: 2
-  my-workflow:
-
+  test-env-vars:
     jobs:
-      - one: 
-        context: KANKYO_HENSU_MEI
+      - build:
+          context: my_context_name # has an env var called MY_ENV_VAR
 
-
-
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run: 
+          name: "echo an env var that is part of our context"
+          command: |
+            echo $SAMPLE
