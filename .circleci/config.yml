@@ -1,37 +1,21 @@
 version: 2.1
 
-executors:
-  xenial:
-    parameters:
-      some-value:
-        type: string
-        default: foo
-    environment:
-      SOME_VAR: << parameters.some-value >>
-    docker:
-
-      - image: ubuntu:xenial
-  bionic:
-    docker:
-      - image: ubuntu:bionic
-
 jobs:
-  test:
+  sayhello: # パラメーター化されたジョブを定義します
+    description: パラメーター化されたジョブを例示する以外、ほとんど何もしないジョブ
     parameters:
-      e:
-        type: executor
-    executor: << parameters.e >>
+      saywhat:
+        description: "だれに挨拶するべきか"
+        default: "World"
+        type: string
+    machine: true
     steps:
 
-      - run: some-tests
+      - run: echo "Hello << parameters.saywhat >>"
 
 workflows:
-  workflow:
+  build:
     jobs:
 
-      - test:
-          e: bionic
-      - test:
-          e:
-            name: xenial
-            some-value: foobar
+      - sayhello: # パラメーター化したジョブを呼び出します
+          saywhat: Everyone
