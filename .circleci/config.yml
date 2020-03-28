@@ -1,17 +1,25 @@
 version: 2.1
 
 
+version: 2
 jobs:
-  run-tests:
+  one:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "${KANKYO_HENSU_MEI}"
-    
+      - run: echo "A first hello"
+      - run: mkdir -p my_workspace
+      - run: echo "Trying out workspaces" > my_workspace/echo-output
+      - persist_to_workspace:
+          # 絶対パス、または working_directory からの相対パスにする必要があります
+          root: my_workspace
+          # root からの相対パスにする必要があります
+          paths:
+            - echo-output      
 workflows:
   version: 2
-  my-workflow:
+  one_and_two:
     jobs:
-      - run-tests:
+      - one
         context: SAMPLE
