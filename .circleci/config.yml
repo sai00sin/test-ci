@@ -14,5 +14,5 @@ jobs:
       - checkout
       - run: 
           name: "echo an env var that is part of our context"
-          command: |
-            echo $SAMPLE
+          command:
+            echo KANKYO_HENSU_MEI
