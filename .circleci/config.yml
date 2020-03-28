@@ -5,20 +5,12 @@ jobs: # basic units of work in a run
     docker: # use the Docker executor
       # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
       - image: circleci/node:10.0-browsers
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
-      # Run a step to setup an environment variable
-      # Redirect MY_ENV_VAR into $BASH_ENV
-      - run: 
-          name: "Setup custom environment variables"
-          command: echo 'export KANKYO_HENSU_MEI="FOO"' >> $BASH_ENV
+  steps:
+    - run:
+        name: 環境変数の設定
+        command: |
+          echo "export PATH=$GOPATH/bin:$PATH" >> $BASH_ENV
+          echo "export GIT_SHA1=$CIRCLE_SHA1" >> $BASH_ENV
 
-      - run:
-          name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
 
-workflows: # a single workflow with a single job called build
-  build:
-    jobs:
-      - build:
-          context: SAMPLE
+
