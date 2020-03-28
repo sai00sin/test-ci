@@ -10,7 +10,7 @@ jobs:
       - run: 
           name: "echo an env var that is part of our context"
           command:
-            echo $KANKYO_HENSU_MEI
+            echo KANKYO_HENSU_MEI
 
 workflows:
   test-env-vars:
