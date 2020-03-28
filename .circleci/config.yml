@@ -1,16 +1,45 @@
 version: 2
 jobs:
-  hoge:
+  build:
     working_directory: ~/workspace
     docker:
       - image: node:9.4.0
     steps:
       - checkout
+      - restore_cache:
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Echo
-          command: echo hello, world.
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Build
+          command: yarn build
+      - save_cache:
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/workspace/node_modules
+  test:
+    working_directory: ~/workspace
+    docker:
+      - image: node:9.4.0
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Test
+          command: yarn test
 workflows:
   version: 2
-  fuga:
+  build_and_test: # workflow名
     jobs:
-      - hoge
+      - build
+      - test:
+          requires: # buildが成功したら実行する
+            - build
