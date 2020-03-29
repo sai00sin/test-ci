@@ -9,6 +9,7 @@ jobs:
   my-job:
     executor: my-executor
     steps:
+      - setup_remote_docker
       - run:
           name: contextで設定した値を表示する
           command: |
