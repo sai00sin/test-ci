@@ -15,8 +15,8 @@ jobs:
     docker:
       - image: alpine:3.7
     steps:
-      run:
-        - sayhello
+      - run:
+          - sayhello
 
 
 
