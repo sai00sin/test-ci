@@ -1,7 +1,12 @@
 version: 2.1
-orbs:
-    hello: circleci/hello-buil@0.0.5
-workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+commands:
+  sayhello:
+    description: "デモ用のごく簡単なコマンドです"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+
+
