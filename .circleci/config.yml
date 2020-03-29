@@ -1,23 +1,17 @@
 version: 2.1
 jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    commands:
-      sayhello:
-        description: "デモ用のごく簡単なコマンドです"
-        parameters:
-          to:
-            type: string
-            default: "Hello World"
-        steps:
-          - run: echo << parameters.to >>
+  docker:
+    - image: alpine:3.7
+  commands:
+    sayhello:
+      description: "デモ用のごく簡単なコマンドです"
+      parameters:
+        to:
+          type: string
+          default: "Hello World"
+      steps:
+        - run: echo << parameters.to >>
 
 
 
 
-workflows:
-  version: 2
-  Example_Workflow:
-    jobs:
-      - Hello-World
