@@ -1,4 +1,16 @@
 version: 2.1
+
+
+commands:
+  sayhello:
+    description: "デモ用のごく簡単なコマンドです"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+
 executors:
   my-executor:
     docker:
