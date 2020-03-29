@@ -1,16 +1,5 @@
 version: 2.1
 
-
-commands:
-  sayhello:
-    description: "デモ用のごく簡単なコマンドです"
-    parameters:
-      to:
-        type: string
-        default: "Hello World"
-    steps:
-      - run: echo << parameters.to >>
-
 executors:
   my-executor:
     docker:
@@ -22,7 +11,7 @@ jobs:
     steps:
       - run:
           name: contextで設定した値を表示する
-          command:
+          command: |
             echo "${KANKYO_HENSU_MEI}"
 
 workflows:
