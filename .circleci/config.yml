@@ -1,15 +1,11 @@
- version: 2.1
-
- orbs:
-   aws-s3: circleci/aws-s3@1.0.0 #circleci 名前空間に s3 orb をインポートします
-
- workflows:
-   build-test-deploy:
-     jobs:
-
-       - deploy2s3:
-         steps:
-           - aws-s3/sync: #s3 orb で宣言されている sync コマンドを呼び出します
-               from: .
-              to: "s3://mybucket_uri"
-              overwrite: true
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+        name: 最初の一歩
+        command: |
+          echo 'Hello World!'
+          echo 'This is the deliverly pipeline'
