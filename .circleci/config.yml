@@ -15,6 +15,5 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run:
           name: コンテナを起動し、動作していることを検証
-          command: |
-            set -x
-            docker-compose up -d
+          command:
+            docker-compose -f ./docker-compose.yml up -d
