@@ -1,17 +1,7 @@
 version: 2.1
-jobs:
-  docker:
-    - image: alpine:3.7
-  commands:
-    sayhello:
-      description: "デモ用のごく簡単なコマンドです"
-      parameters:
-        to:
-          type: string
-          default: "Hello World"
-      steps:
-        - run: echo << parameters.to >>
-
-
-
-
+orbs:
+    hello: circleci/hello-build@0.0.5
+workflows:
+    "Hello Workflow":
+        jobs:
+          - hello/hello-build
