@@ -1,7 +1,7 @@
 FROM node:12.13-alpine
 
 WORKDIR /app
-COPY package*.json /app
+COPY ./project/package*.json /app
 
 
 
