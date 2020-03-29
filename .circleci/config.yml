@@ -12,11 +12,10 @@ jobs:
       - run:
           name: contextで設定した値を表示する
           command: |
-            echo "${KANKYO_HENSU_MEI}"
+            echo "${DOCKERHUB_PASSWORD}"
 
 workflows:
   version: 2
   Example_Workflow:
     jobs:
       - my-job
-          context: SAMPLE
