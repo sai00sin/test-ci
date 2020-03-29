@@ -17,7 +17,7 @@ executors:
       - image: circleci/ruby:2.5.1-node-browsers
 
 jobs:
-  build:
+  my-job:
     docker:
       - image: buildpack-deps:trusty
     environment:
