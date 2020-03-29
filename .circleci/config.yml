@@ -14,8 +14,9 @@ jobs:
   Hello-World:
     docker:
       - image: alpine:3.7
-    run:
-      - sayhello
+    steps:
+      run:
+        - sayhello
 
 
 
