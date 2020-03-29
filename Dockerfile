@@ -1,7 +1,7 @@
 FROM node:12.13-alpine
 
 WORKDIR /app
-COPY ./project/package*.json /app
+COPY ./project/package.json ./project/package-lock.json /app
 
 
 
