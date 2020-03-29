@@ -13,5 +13,6 @@ jobs:
       - run:
           name: コードの取得
           command: |
+            cd test
             ls -al
             echo '^^^That shoud look familiar^^^'
