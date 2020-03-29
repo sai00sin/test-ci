@@ -17,13 +17,21 @@ executors:
       - image: circleci/ruby:2.5.1-node-browsers
 
 jobs:
-  my-job:
-    executor: my-executor
-    commands: sayhello
-
+  build:
+    docker:
+      - image: buildpack-deps: trusty
+    environment:
+      FOO: bar
+    parallelism: 3
+    resource_class: large
+    working_directory: ~/my-app
+    branches:
+      only:
+        - master
+        - /rc-.*/
     steps:
-      - run: echo Executor の“外”で定義しました
-
+      - run: make test
+      - run: make
 
 
 workflows:
