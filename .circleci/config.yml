@@ -5,7 +5,7 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
-        name: 最初の一歩
-        command: |
-          echo 'Hello World!'
-          echo 'This is the deliverly pipeline'
+          name: 最初の一歩
+          command: |
+            echo 'Hello World!'
+            echo 'This is the deliverly pipeline'
