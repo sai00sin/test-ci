@@ -14,11 +14,10 @@ jobs:
   Hello-World:
     docker:
       - image: alpine:3.7
+    command: sayhello
     steps:
       - run:
         name: 承認の完了
-        command:
-          - sayhello
 
 
 
