@@ -16,7 +16,7 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
-          - sayhello
+        - sayhello
 
 
 
