@@ -9,3 +9,11 @@ jobs:
     executor: my-executor
     steps:
       - run: echo Executor の“外”で定義しました
+
+
+
+workflows:
+  version: 2
+  Example_Workflow:
+    jobs:
+      - my-job
