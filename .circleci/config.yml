@@ -1,38 +1,15 @@
-version: 2
-jobs:
-  build1:
-    steps:
-      - persist_to_workspace: # ダウンストリームジョブで使用するために、指定されたパス
-      # (workspace/echo-output) をワークスペースに維持します。 このパスは、絶対パスまたは
-      # working_directory からの相対パスでなければなりません。 これは、ワークスペースの
-      # ルートディレクトリとなる、コンテナ上のディレクトリです。
-          root: workspace
-            # ルートからの相対パスでなければなりません。
-          paths:
-            - echo-output
+ version: 2.1
 
-  build2:
-    steps:
-      - attach_workspace:
-        # 絶対パスまたは working_directory からの相対パスでなければなりません。
-          at: /tmp/workspace
+ orbs:
+   aws-s3: circleci/aws-s3@1.0.0 #circleci 名前空間に s3 orb をインポートします
 
-  build3:
-    steps:
-      - store_artifacts: # 詳細については、circleci.com/docs/ja/2.0/artifacts/ を参照してください。
-          path: /tmp/artifact-1
-          destination: artifact-file
+ workflows:
+   build-test-deploy:
+     jobs:
 
-workflows:
-  version: 2
-  build_and_test: # ワークフロー名
-    jobs:
-      - build1
-      - build2:
-        requires:
-           - build1 # build1 ジョブが正常に完了するのを待ってから開始します。
-           # この他の例については、circleci.com/docs/ja/2.0/workflows/ を参照してください。
-      - build3:
-        requires:
-           - build1 # build1 ジョブが正常に完了するのを待ってから、時間を節約するために
-           # build2 と build 3 の並列実行を開始します。
+       - deploy2s3:
+         steps:
+           - aws-s3/sync: #s3 orb で宣言されている sync コマンドを呼び出します
+               from: .
+              to: "s3://mybucket_uri"
+              overwrite: true
