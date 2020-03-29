@@ -9,4 +9,8 @@ commands:
     steps:
       - run: echo << parameters.to >>
 
-
+workflows:
+  version: 2
+  Example_Workflow:
+    jobs:
+      - sayhello
