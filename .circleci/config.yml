@@ -19,7 +19,7 @@ executors:
 jobs:
   my-job:
     executor: my-executor
-    command: sayhello
+    commands: sayhello
 
     steps:
       - run: echo Executor の“外”で定義しました
