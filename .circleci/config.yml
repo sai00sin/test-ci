@@ -16,4 +16,8 @@ jobs:
           name: コンテナを起動し、動作していることを検証
           command:
             docker-compose -f ./docker-compose.yml up --build -d
+      - run:
+          name: テスト
+          command:
+            docker exec -it frontend yarn test
 
