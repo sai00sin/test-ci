@@ -16,4 +16,4 @@ jobs:
           name: コンテナを起動し、動作していることを検証
           command: |
             ls
-            docker-compose -f ./docker-compose.yml up -d
+            # docker-compose -f ./docker-compose.yml up -d
