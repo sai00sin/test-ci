@@ -18,23 +18,17 @@ executors:
 
 jobs:
   my-job:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 3
-    resource_class: large
-    working_directory: ~/my-app
-    branches:
-      only:
-        - master
-        - /rc-.*/
+    executor: my-executor
+  commands: sayhello
     steps:
-      - run: make test
-      - run: make
+      - run:
+          name: contextで設定した値を表示する
+          command:
+            echo "${KANKYO_HENSU_MEI}"
 
 workflows:
   version: 2
   Example_Workflow:
     jobs:
       - my-job
+          context: SAMPLE
