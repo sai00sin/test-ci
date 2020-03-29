@@ -6,6 +6,6 @@ services:
     container_name: frontend
     build: .
     tty: true
-    command: npm run dev
+    command: yarn test
     ports:
       - '3000:3000'

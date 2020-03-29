@@ -1,9 +1,13 @@
 {
   "name": "my-app",
   "scripts": {
-    "dev": "nuxt"
+    "dev": "nuxt",
+    "test": "jest"
   },
   "dependencies": {
     "nuxt": "^2.12.1"
+  },
+  "devDependencies": {
+    "jest": "^25.2.4"
   }
 }
