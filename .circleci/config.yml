@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.0
 commands:
   sayhello:
     description: "デモ用のごく簡単なコマンドです"
@@ -9,8 +9,19 @@ commands:
     steps:
       - run: echo << parameters.to >>
 
+
+jobs:
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    run:
+      - sayhello
+
+
+
+
 workflows:
   version: 2
   Example_Workflow:
     jobs:
-      - sayhello
+      - Hello-World
