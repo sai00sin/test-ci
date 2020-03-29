@@ -16,7 +16,9 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
-        sayhello
+        name: 承認の完了
+        command:
+          sayhello
 
 
 
