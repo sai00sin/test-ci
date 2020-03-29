@@ -5,10 +5,10 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
-        name: Hello World
-        command: |
-          echo 'Hello World'
-          echo 'This is the delivery pipeline'
+          name: Hello World
+          command: |
+            echo 'Hello World'
+            echo 'This is the delivery pipeline'
 
   I-Have-Code:
     docker:
@@ -16,26 +16,26 @@ jobs:
     steps:
       - checkout
       - run:
-        name: コードの取得
-        command: |
-          ls -al
-          echo '^^^That should look familiar^^^'
+          name: コードの取得
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
   Run-With-Node:
     docker:
       - image: circleci/node:10-browsers
     steps:
       - run:
-        name: ノードをもつコンテナで実行
-        command: |
-          node -v
+          name: ノードをもつコンテナで実行
+          command: |
+            node -v
   Now-Complete:
     docker:
       - image: alpine:3.7
     steps:
       - run:
-        name: 承認の完了
-        command: |
-          echo 'Do work once the approval has completed'
+          name: 承認の完了
+          command: |
+            echo 'Do work once the approval has completed'
 
 workflows:
   version: 2
@@ -43,17 +43,17 @@ workflows:
     jobs:
       - Hello-World
       - I-Have-Code:
-          requires:
-            - Hello-World
+        requires:
+          - Hello-World
       - Run-With-Node:
-          requires:
-            - Hello-World
+        requires:
+          - Hello-World
       - Hold-For-Approval:
-          type: approval
-          requires:
-            - Run-With-Node
-            - I-Have-Code
+        type: approval
+        requires:
+          - Run-With-Node
+          - I-Have-Code
       - Now-Complete:
-          requires:
-            - Hold-For-Approval
+        requires:
+          - Hold-For-Approval
 
