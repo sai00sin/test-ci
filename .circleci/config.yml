@@ -19,7 +19,7 @@ executors:
 jobs:
   build:
     docker:
-      - image: buildpack-deps: trusty
+      - image: buildpack-deps:trusty
     environment:
       FOO: bar
     parallelism: 3
@@ -32,7 +32,6 @@ jobs:
     steps:
       - run: make test
       - run: make
-
 
 workflows:
   version: 2
